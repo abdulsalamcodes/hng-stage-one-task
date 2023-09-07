@@ -8,7 +8,7 @@ app.use(express.json());
 app.get("/api", (req, res) => {
   try {
     const query = req.query;
-    const currentDate = new Date();
+    const currentDate = new Date("2023-09-07T20:56:48Z");
 
     const daysOfWeek = [
       "Sunday",
@@ -20,14 +20,15 @@ app.get("/api", (req, res) => {
       "Saturday",
     ];
     const dayOfWeek = daysOfWeek[currentDate.getDay()];
-    const utcTime = currentDate.toISOString();
+    const utcTimeWithoutMilliseconds = currentDate.toISOString().split('.')[0] + 'Z';
+
 
     const responseBody = {
       slack_name: query.slack_name || "elhakamy",
       current_day: dayOfWeek,
-      utc_time: utcTime,
+      utc_time: utcTimeWithoutMilliseconds,
       track: query.track || "Backend",
-      github_file_url: "https://github.com/username/repo/blob/main/file_name.ext",
+      github_file_url: "https://github.com/abdulsalamcodes/hng-stage-one-task/blob/main/index.js",
       github_repo_url: "https://github.com/abdulsalamcodes/hng-stage-one-task",
       status_code: 200,
     };
